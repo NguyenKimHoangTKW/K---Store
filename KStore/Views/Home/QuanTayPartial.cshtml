@@ -1,0 +1,24 @@
+﻿@model IEnumerable<KStore.Models.Product>
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <a href="#" class="latest-product__item">
+        <div class="latest-product__item__pic">
+            <img src="~/Areas/Admin/Images/Product_Images/@item.thumb" alt="">
+        </div>
+        <div class="latest-product__item__text">
+            @if (item.nameProduct.Length < 50)
+            {
+                <h6>@item.nameProduct</h6>
+            }
+            else
+            {
+                <h6>@item.nameProduct.Substring(0, 50) ...</h6>
+            }
+
+            <span>@string.Format("{0:#,0} VNĐ", item.price)</span>
+        </div>
+    </a>
+}

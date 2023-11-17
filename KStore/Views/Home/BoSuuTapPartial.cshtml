@@ -1,0 +1,11 @@
+﻿@model IEnumerable<KStore.Models.ProductCategory>
+
+    <ul>
+        @foreach (var item in Model)
+        {
+
+            <li><a href="@Url.Action("ListSanPhamTheoCat","Home", new {id = item.idProductCategory})">@item.nameProductCategory</a></li>
+        }
+    </ul>
+
+

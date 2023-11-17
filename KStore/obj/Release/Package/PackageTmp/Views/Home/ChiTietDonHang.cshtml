@@ -1,0 +1,151 @@
+﻿@model ClotheSstore.Models.Product
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="product-container">
+    <div class="product-main">
+        <div class="row content-row mb-0">
+
+            <div class="product-gallery large-6 col">
+
+                <div class="product-images relative mb-half has-hover woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4">
+
+                    <div class="badge-container is-larger absolute left top z-1">
+                    </div>
+
+                    <div class="image-tools absolute top show-on-hover right z-3">
+                    </div>
+
+                    <figure class="woocommerce-product-gallery__wrapper product-gallery-slider slider slider-nav-small mb-half"
+                            data-flickity-options='{
+                "cellAlign": "center",
+                "wrapAround": true,
+                "autoPlay": false,
+                "prevNextButtons":true,
+                "adaptiveHeight": true,
+                "imagesLoaded": true,
+                "lazyLoad": 1,
+                "dragThreshold" : 15,
+                "pageDots": false,
+                "rightToLeft": false       }'>
+                        <div data-thumb="~/Areas/Admin/Images/Product_Images/@Model.thumb" class="woocommerce-product-gallery__image slide first"><a href="~/Areas/Admin/Images/Product_Images/@Model.thumb"><img width="800" height="800" src="~/Areas/Admin/Images/Product_Images/@Model.thumb" class="lazy-load lazy-load wp-post-image " alt="" decoding="async" loading="lazy" title="w1" data-caption="" /></a></div>
+                    </figure>
+
+                    <div class="image-tools absolute bottom left z-3">
+                        <a href="~/Areas/Admin/Images/Product_Images/@Model.thumb" class="zoom-button button is-outline circle icon tooltip hide-for-small" title="Zoom">
+                            <i class="icon-expand"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="product-info summary col-fit col entry-summary product-summary">
+
+                <nav class="woocommerce-breadcrumb breadcrumbs uppercase"><a href="@Url.Action("Index","Home")">Trang chủ</a> <span class="divider">&#47;</span> <a href="/">@Model.nameProduct</a></nav><h1 class="product-title product_title entry-title">
+                    @Model.nameProduct
+                </h1>
+                <hr>
+                <div class='jdgm-widget jdgm-preview-badge' data-id='2231384'>
+                </div>
+                <div class="price-wrapper">
+                    <p class="price product-page-price ">
+                        <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol"></span>@string.Format("{0:#,0} VNĐ", Model.price) </bdi></span>
+                    </p>
+                </div>
+                <div class="single_variation_wrap">
+                    <div class="woocommerce-variation single_variation"></div>
+                    <div class="woocommerce-variation-add-to-cart variations_button">
+                        <div class="sticky-add-to-cart-wrapper">
+
+
+                            @using (Html.BeginForm("ThemGioHang", "GioHang", new { ms = Model.idProduct, url = Request.Url.ToString() }))
+                            {
+
+                                @Html.Action("SizeTheoSanPham", "Home", new { id = Model.idProduct })
+                            <input type="number" min="1" name="txtSoLuong" style="background-color: white; width: 70px;" value="1" id="soLuongInput" />
+
+                            <button id="add-to-cart-button" class="btn btn-outline-primary" style="height: 37px; float: right;border: 1px solid black">
+                                
+                                Thêm vào giỏ hàng
+                            </button>
+                            }
+                        </div>
+                    </div>
+                    <input type="hidden" name="add-to-cart" value="2231384" />
+                    <input type="hidden" name="product_id" value="2231384" />
+                    <input type="hidden" name="variation_id" class="variation_id" value="0" />
+                </div>
+            </div>
+            </div>
+
+            <div id="product-sidebar" class="mfp-hide">
+                <div class="sidebar-inner">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="product-footer">
+        <div class="container">
+
+            <div class="woocommerce-tabs wc-tabs-wrapper container tabbed-content">
+                <ul class="tabs wc-tabs product-tabs small-nav-collapse nav nav-uppercase nav-line nav-left" role="tablist">
+                    <li class="description_tab active" id="tab-title-description" role="tab" aria-controls="tab-description">
+                        <a href="#tab-description">
+                            Thông tin sản phẩm
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-panels">
+                    <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content active" id="tab-description" role="tabpanel" aria-labelledby="tab-title-description">
+                        <div class="long-description">
+                            <p><strong>Thông tin sản phẩm</strong></p>
+                            <ul>
+                                <li>@Html.Raw(Model.describe)</li>
+
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--additional_information panel entry-content " id="tab-additional_information" role="tabpanel" aria-labelledby="tab-title-additional_information">
+
+
+                        <table class="woocommerce-product-attributes shop_attributes">
+                            <tr class="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_size">
+                                <th class="woocommerce-product-attributes-item__label">Size</th>
+                                <td class="woocommerce-product-attributes-item__value">
+                                    <p>L, M, S, XL, XS, XXS</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style="clear:both;"></div>
+            <div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='Pink Pulse Floral Square-Neck Midi Dress' data-id='2231384'>
+            </div>
+            <div style="clear:both;"></div>
+
+
+        </div>
+    </div>
+
+
+    <script>
+        var soLuongInput = document.getElementById('soLuongInput');
+
+        var giaTriBanDau = soLuongInput.value;
+
+        soLuongInput.addEventListener('change', function () {
+            if (soLuongInput.value < 1) {
+                soLuongInput.value = giaTriBanDau;
+            }
+            giaTriBanDau = soLuongInput.value;
+        });
+    </script>

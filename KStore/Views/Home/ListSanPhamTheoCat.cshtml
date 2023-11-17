@@ -1,0 +1,164 @@
+﻿@model PagedList.IPagedList<KStore.Models.Product>
+@using PagedList.Mvc;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.Any())
+{
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/Content/assets/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Sản phẩm theo danh mục : <b>@Model.FirstOrDefault().ProductCategory.nameProductCategory</b></h2>
+                        <div class="breadcrumb__option">
+                            <a href="@Url.Action("Index","Home")">Trang chủ</a>
+                            <span>Danh mục</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <div class="sidebar">
+                        <div class="sidebar__item">
+                            <h4>DANH MỤC SẢN PHẨM</h4>
+                            @Html.Action("BoSuuTapPartial", "Home")
+                        </div>
+                        <div class="sidebar__item">
+                            <div class="latest-product__text">
+                                <h4>NỔI BẬT</h4>
+                                <div class="latest-product__slider owl-carousel">
+                                    <div class="latest-prdouct__slider__item">
+                                       @Html.Action("QuanTayPartial", "Home")
+                                    </div>
+                                    <div class="latest-prdouct__slider__item">
+                                        @Html.Action("AoSoMiPartial", "Home")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-7">
+                    <div class="filter__item">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="filter__found">
+                                    <h6><span>@ViewBag.TongSanPham</span>Sản phẩm</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg">
+                                        <img src="~/Areas/Admin/Images/Product_Images/@item.thumb" />
+                                        <ul class="product__item__pic__hover">
+                                            <li><a data-toggle="modal" data-target="@("#DatHang-"+item.idProduct)" data-url="@Url.Action("DatHangPartial","Home", new {id = item.idProduct})"><i class="fa fa-shopping-cart"></i></a></li>
+                                            @Html.Partial("DatHangPartial", item)
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="@Url.Action("ChiTietDonHang","Home", new {id = item.idProduct})">@item.nameProduct</a></h6>
+                                        <h5>@string.Format("{0:#,0} VNĐ", item.price)</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="product__pagination">
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            <a href="@Url.Action("ListSanPhamTheoCat", new { id = ViewBag.idCat, page = i })" class="@(i == Model.PageNumber ? "active" : "")">@i</a>
+                        }
+
+                        @if (Model.HasNextPage)
+                        {
+                            <a href="@Url.Action("ListSanPhamTheoCat", new { id = ViewBag.idCat, page = Model.PageNumber + 1 })">
+                                <i class="fa fa-long-arrow-right"></i>
+                            </a>
+                        }
+                    </div>
+                    <div style="margin: 50px auto; width: 600px; text-align:right">
+                        <strong>Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount</strong>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+}
+else
+{
+    <!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="/Content/assets/img/breadcrumb.jpg">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Sản phẩm theo danh mục</h2>
+                    <div class="breadcrumb__option">
+                        <a href="@Url.Action("Index","Home")">Trang chủ</a>
+                        <span>Danh mục</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Breadcrumb Section End -->
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <div class="sidebar">
+                        <div class="sidebar__item">
+                            <h4>DANH MỤC SẢN PHẨM</h4>
+                            @Html.Action("BoSuuTapPartial", "Home")
+                        </div>
+                        <div class="sidebar__item">
+                            <div class="latest-product__text">
+                                <h4>NỔI BẬT</h4>
+                                <div class="latest-product__slider owl-carousel">
+                                    <div class="latest-prdouct__slider__item">
+                                        @Html.Action("QuanTayPartial", "Home")
+                                    </div>
+                                    <div class="latest-prdouct__slider__item">
+                                        @Html.Action("AoSoMiPartial", "Home")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-7">
+                    <div class="filter__item">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="filter__found">
+                                    <h6>Không có sản phẩm tồn tại</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+}

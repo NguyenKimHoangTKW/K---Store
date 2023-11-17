@@ -1,0 +1,10 @@
+﻿@model IEnumerable<KStore.Models.Product>
+
+@foreach (var item in Model)
+{
+    <div class="col-lg-3">
+        <div class="categories__item set-bg" data-setbg="/Areas/Admin/Images/Product_Images/@item.thumb">          
+                <h5><a href="@Url.Action("ChiTietDonHang","Home", new {id = item.idProduct})">Chi Tiết</a></h5>
+        </div>
+    </div>
+}

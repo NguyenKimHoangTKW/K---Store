@@ -1,0 +1,106 @@
+﻿@{ var usercus = Session["Customer"] as KStore.Models.Customer;}
+@if (usercus == null)
+{
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> 2124802010533@student.tdmu.edu.vn</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__auth">
+                                <a href="@Url.Action("Login","Account")"><i class="fa fa-user"></i>Đăng nhập</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                            <li><a href="">Tình trạng giao hàng</a></li>
+                            <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    @Html.Action("GioHangPartial", "GioHang")
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+}
+else
+{
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> 2124802010533@student.tdmu.edu.vn</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            <i class="fa fa-user"></i>Chào bạn @usercus.nameCustomer |
+                            <div class="header__top__right__auth">
+                                <a href="@Url.Action("TitleUser","Account", new {id = usercus.idCustomer})"><i class="fa fa-address-card"></i>Thông tin tài khoản | </a>
+                            </div>
+                            <div class="header__top__right__auth">
+
+                                <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out"></i>Đăng xuất</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                            
+                            <li><a href="@Url.Action("TinhTrangGiaoHang","GioHang", new {id = usercus.idCustomer})">Tình trạng giao hàng</a></li>
+                            <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    @Html.Action("GioHangPartial", "GioHang")
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+}

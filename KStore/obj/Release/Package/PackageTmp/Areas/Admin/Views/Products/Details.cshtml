@@ -1,0 +1,92 @@
+﻿@model ClotheSstore.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div>
+  
+    <dl class="dl-horizontal">
+        <div class="card" style=" margin-top: 75px;">
+            <div class="card-body">
+                <h4 class="card-title">Thông tin sản phẩm</h4>
+                <div class="table-responsive">
+                    <table class="product-info-table m-t-20">
+                        <tbody>
+                            <tr>
+                                <td>Mã sản phẩm:</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.codeProduct)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tên sản phẩm:</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.nameProduct)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả:</td>
+                                <td>
+                                   @Html.Raw(Model.describe)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hình ảnh:</td>
+                                <td>
+                                    <img src="~/Areas/Admin/Images/Product_Images/@Model.thumb" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Trạng thái mở bán :</td>
+                                @if (Model.stock == true)
+                                {
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div>In Stock</div>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-danger badge-dot m-r-10"></div>
+                                            <div>Out of Stock</div>
+                                        </div>
+                                    </td>
+                                }
+                            </tr>
+                            <tr>
+                                <td>Giá:</td>
+                                <td>
+                                    @string.Format("{0:#,0} VNĐ", Model.price)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày thêm:</td>
+                                <td>
+                                    @string.Format("{0:dd-MM-yyyy}",Model.updateDay)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tên danh mục sản phẩm:</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.ProductCategory.nameProductCategory)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idProduct }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
