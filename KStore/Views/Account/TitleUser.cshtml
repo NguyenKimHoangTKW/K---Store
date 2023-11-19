@@ -45,11 +45,11 @@
                                         <input type="text" class="form-control" name="address" placeholder="Date of Birth" value="@item.address" readonly="False">
                                     </div>
                                 </div>
-                                <button class="btn btn-info btn-tone m-r-5">
-                                    <a href="@Url.Action("EditTitleUser","Account", new {id = item.idCustomer})">Thay đổi thông tin tài khoản</a>
+                                <button class="btn btn-success">
+                                    <a href="@Url.Action("EditTitleUser","Account", new {id = item.idCustomer})" style="color:white">Thay đổi thông tin tài khoản</a>
                                 </button>
-                                <button class="btn btn-info btn-tone m-r-5">
-                                    <a href="@Url.Action("EditPassWordUser","Account", new {id = item.idCustomer})">Thay đổi mật khẩu</a>
+                                <button class="btn btn-success">
+                                    <a href="@Url.Action("EditPassWordUser","Account", new {id = item.idCustomer})" style="color:white">Thay đổi mật khẩu</a>
                                 </button>
                             }
 

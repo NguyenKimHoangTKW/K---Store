@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
+using System.Data.Entity;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace KStore.Controllers
 {
@@ -222,6 +225,34 @@ namespace KStore.Controllers
         public ActionResult ErrorThongTinHang()
         {
             return View();
+        }
+        public async Task<ActionResult> HuyDonHang(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Order order = db.Orders.Find(id);
+
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            order.deliveryStatus = "Đơn hàng đã hủy";
+            order.deliveryDate = DateTime.Now;
+            db.Entry(order).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            if (Request.UrlReferrer != null)
+            {
+                TempData["SweetAlertMessage"] = "Hủy đơn hàng thành công";
+                TempData["SweetAlertType"] = "success";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

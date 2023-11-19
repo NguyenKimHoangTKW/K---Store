@@ -11,9 +11,9 @@
 @foreach (var item in Model)
 {
     <div class="container1">
-        <b>Ngày đặt hàng :  @string.Format("{0:dd-MM-yyyy HH:mm:ss}", item.orderDate) </b>
-        <h1>Tình trạng giao hàng</h1>
-        <b>Số hóa đơn : #@item.codeOrder</b>
+        <b style="font-family:'Times New Roman'; font-size:25px">Ngày đặt hàng :  @string.Format("{0:dd-MM-yyyy HH:mm:ss}", item.orderDate) </b>
+        <h1 style="font-family:'Times New Roman'; font-size: 50px">Tình trạng giao hàng</h1>
+        <b style="font-family:'Times New Roman'; font-size:25px">Số hóa đơn : #@item.codeOrder</b>
         @if (item.deliveryStatus == "Chờ xác nhận")
         {
             <div class="progress-steps">
@@ -34,6 +34,14 @@
                     <div class="step-label">Chờ xử lý</div>
                 </div>
             </div>
+            <a href="javascript:void(0);" class="order-details-link" data-id="@item.idOrder">
+                <div style="text-align: right; margin-top: 15px">
+                    <button class="btn btn-primary">XEM CHI TIẾT</button>
+                </div>
+            </a>
+            <a href="@Url.Action("HuyDonHang","GioHang", new {id = item.idOrder})">
+                <button class="btn btn-danger">HỦY ĐƠN</button>
+            </a>
         }
         else if (item.deliveryStatus == "Đang chuẩn bị giao hàng")
         {
@@ -55,7 +63,11 @@
                     <div class="step-label">Chờ xử lý</div>
                 </div>
             </div>
-            
+            <a href="javascript:void(0);" class="order-details-link" data-id="@item.idOrder">
+                <div style="text-align: right; margin-top: 15px">
+                    <button class="btn btn-primary">XEM CHI TIẾT</button>
+                </div>
+            </a>
         }
         else if (item.deliveryStatus == "Đang giao hàng")
         {
@@ -77,6 +89,11 @@
                     <div class="step-label">Chờ xử lý</div>
                 </div>
             </div>
+            <a href="javascript:void(0);" class="order-details-link" data-id="@item.idOrder">
+                <div style="text-align: right; margin-top: 15px">
+                    <button class="btn btn-primary">XEM CHI TIẾT</button>
+                </div>
+            </a>
         }
         else if (item.deliveryStatus == "Giao hàng thành công")
         {
@@ -99,68 +116,61 @@
                 </div>
             </div>
             <div>
-                <b>Ngày giao hàng : @string.Format("{0:dd-MM-yyyy HH:mm:ss}",item.deliveryDate)</b>
+                <b>Ngày giao hàng : @string.Format("{0:dd-MM-yyyy HH:mm:ss}", item.deliveryDate)</b>
             </div>
+            <a href="javascript:void(0);" class="order-details-link" data-id="@item.idOrder">
+                <div style="text-align: right; margin-top: 15px">
+                    <button class="btn btn-primary">XEM CHI TIẾT</button>
+                </div>
+            </a>
+        }
+        else if (item.deliveryStatus == "Đơn hàng đã hủy")
+        {
+            <div class="progress-steps">
+                <div class="step in-progress">
+                    <div class="step-icon">&#10005;</div>
+                    <div class="step-label">Đơn đã bị hủy</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">&#9711;</div>
+                    <div class="step-label">Đang đóng gói</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">&#9711;</div>
+                    <div class="step-label">Đang giao hàng</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">&#9711;</div>
+                    <div class="step-label">Chờ xử lý</div>
+                </div>
+            </div>
+            <a href="javascript:void(0);" class="order-details-link" data-id="@item.idOrder">
+                <div style="text-align: right; margin-top: 15px">
+                    <button class="btn btn-primary">XEM CHI TIẾT</button>
+                </div>
+            </a>
+
         }
 
-        <a href="javascript:void(0);" class="order-details-link" data-id="@item.idOrder">
-            <div style="text-align: right; margin-top: 15px">
-                <b>Chi Tiết</b>
-            </div>
-        </a>
 
         <div class="product-details-container"></div>
-   
+
     </div>
 
 }
-
-<div style="margin: 50px auto; width: 600px; text-align:right">
-    <strong>Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount</strong>
-</div>
-<div class="MenuTrang">
-
-    @Html.PagedListPager(Model, page => Url.Action("TinhTrangGiaoHang", new { id = ViewBag.Orderid, page = page }))
-
-</div>
-<style>
-    .MenuTrang {
-        display: flex;
-        justify-content: center;
-        padding: 10px;
+<div class="product__pagination" style="text-align:center">
+    @for (int i = 1; i <= Model.PageCount; i++)
+    {
+        <a href="@Url.Action("TinhTrangGiaoHang", new {  id = ViewBag.Orderid,page = i })" class="@(i == Model.PageNumber ? "active" : "")">@i</a>
     }
 
-        .MenuTrang .pagination {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-            .MenuTrang .pagination li {
-                margin: 0;
-                padding: 0;
-                margin-right: 5px; 
-            }
-
-            .MenuTrang .pagination a {
-                color: black;
-                background-color: #E0FFFF;
-                border: 1px solid #007bff;
-                border-radius : 50%;
-                padding: 6px 12px;
-                text-decoration: none;
-                transition: background-color 0.3s;
-            }
-                .MenuTrang .pagination a:hover {
-                    background-color: #7FFFD4;
-                }
-
-            .MenuTrang .pagination .active a {
-                background-color: #00FFFF; /* Màu nền nút đã chọn */
-            }
-  
-</style>
+    @if (Model.HasNextPage)
+    {
+        <a href="@Url.Action("TinhTrangGiaoHang", new {  id = ViewBag.Orderid,page = Model.PageNumber + 1 })">
+            <i class="fa fa-long-arrow-right"></i>
+        </a>
+    }
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -187,5 +197,16 @@
             }
         });
     });
+    @if (TempData["SweetAlertMessage"] != null)
+{
+    <text>
+    Swal.fire({
+        title: '@TempData["SweetAlertMessage"]',
+        icon: '@TempData["SweetAlertType"]',
+        showConfirmButton: false,
+        timer: 2000
+    });
+    </text>
+}
 </script>
 

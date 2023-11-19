@@ -64,7 +64,8 @@
                                         <div class="mt-3">
                                             <p class="text-muted mb-2">Số lượng</p>
                                             <div class="d-inline-flex">
-                                                <input type="number" min="1" name="txtSoLuong" value="@item.iSoLuong" style="background-color:white" />
+                                                <input type="number" min="1" name="txtSoLuong" value="@item.iSoLuong" style="background-color:white" data-original-value="@item.iSoLuong" data-price-per-item="@item.dDonGia" oninput="updateQuantity(this); reloadForm(this);" />
+
                                             </div>
                                         </div>
                                     </div>
@@ -86,14 +87,14 @@
                 <!-- end card -->
             }
 
-        <div class="row my-4">
-            <div class="col-sm-3">
-                <a href="" class="btn btn-link text-muted">
-                    <i class="mdi mdi-arrow-left me-1"></i> Tiếp tục mua hàng
-                </a>
-            </div> <!-- end col -->
-        </div> <!-- end row-->
-            </div>
+            <div class="row my-4">
+                <div class="col-sm-3">
+                    <a href="" class="btn btn-link text-muted">
+                        <i class="mdi mdi-arrow-left me-1"></i> Tiếp tục mua hàng
+                    </a>
+                </div> <!-- end col -->
+            </div> <!-- end row-->
+        </div>
 
         <div class="col-xl-4">
             <div class="mt-5 mt-lg-0">
@@ -131,10 +132,14 @@
                         </div>
                         @using (Html.BeginForm("Order", "GioHang"))
                         {
-                            <input type="radio" name="CheckPay" value="Thanh toán khi nhận hàng (COD)" />
+                            <div>
+                                <input type="radio" name="CheckPay" value="Thanh toán khi nhận hàng (COD)" />
+                                Thanh toán khi nhận hàng (COD)
+                            </div>
+
                             <div style=" margin-top: 40px;">
                                 <!-- end table-responsive -->
-                                <button type="submit">Đặt hàng</button>
+                                <button class="btn btn-primary">Đặt hàng</button>
                                 <a href="@Url.Action("XoaToanBoSanPham","GioHang")" class="btn btn-success">
                                     <i class="mdi mdi-cart-outline me-1"></i> Xóa giỏ hàng
                                 </a>
@@ -196,3 +201,38 @@
         border-radius: 1rem;
     }
 </style>
+
+<script>
+    function updateQuantity(input) {
+        var newValue = parseInt(input.value);
+        var originalValue = parseInt(input.getAttribute('data-original-value'));
+
+        if (isNaN(newValue) || newValue < 1) {
+            input.value = originalValue;
+        } else {
+            // Thực hiện cập nhật số lượng bằng giá trị mới
+            input.value = newValue;
+
+            // (Tùy chọn) Cập nhật tổng tiền tương ứng
+            var pricePerItem = parseFloat(input.getAttribute('data-price-per-item'));
+            var totalPriceElement = input.closest('.card-body').querySelector('.text-muted.mb-2');
+
+            if (!isNaN(pricePerItem) && totalPriceElement) {
+                var totalPrice = newValue * pricePerItem;
+                totalPriceElement.nextElementSibling.innerText = formatCurrency(totalPrice);
+            }
+        }
+    }
+
+    // Hàm định dạng số tiền thành chuỗi theo định dạng VNĐ
+    function formatCurrency(value) {
+        return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    }
+    function reloadForm(input) {
+        // Lấy form cha của ô input
+        var form = input.closest('form');
+
+        // Gọi hàm submit để reload form
+        form.submit();
+    }
+</script>

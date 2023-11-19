@@ -12,17 +12,18 @@
                      class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <h1 class="uppercase mb-0" style="font-weight: bold; text-align: center; padding-bottom: 27px;">ĐĂNG NHẬP</h1>
                 @using (Html.BeginForm("Login", "Account"))
                 {
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                        <input type="text" name="userName" class="form-control form-control-lg" placeholder="Nhập tên tài khoản ..." required/>
+                        <input type="text" name="userName" class="form-control form-control-lg" placeholder="Nhập tên tài khoản ..." required />
                         <label class="form-label" for="form3Example3">Tên tài khoản</label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-outline mb-3">
-                        <input type="password" name="passWord" class="form-control form-control-lg" placeholder="Nhập mật khẩu ..." required/>
+                        <input type="password" name="passWord" class="form-control form-control-lg" placeholder="Nhập mật khẩu ..." required />
                         <label class="form-label" for="form3Example4">Mật khẩu</label>
                     </div>
 
@@ -34,7 +35,7 @@
                                 Remember me
                             </label>
                         </div>
-                        <a href="#!" class="text-body">Forgot password?</a>
+                        <a href="@Url.Action("ForgetPassword","Account")" class="text-body">Forgot password?</a>
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
@@ -43,8 +44,8 @@
                             Login
                         </button>
                         <p class="small fw-bold mt-2 pt-1 mb-0">
-                            Don't have an account? <a href="#!"
-                                                      class="link-danger">Register</a>
+                            Bạn chưa có tài khoản <a href="@Url.Action("Register","Account")"
+                                                     class="link-danger">Nhấp vào đây để đăng ký</a>
                         </p>
                     </div>
                 }
@@ -54,3 +55,16 @@
         </div>
     </div>
 </section>
+<script>
+    @if (TempData["SweetAlertMessage"] != null)
+    {
+        <text>
+        Swal.fire({
+            title: '@TempData["SweetAlertMessage"]',
+            icon: '@TempData["SweetAlertType"]',
+            showConfirmButton: false,
+            timer: 2000
+        });
+        </text>
+    }
+</script>

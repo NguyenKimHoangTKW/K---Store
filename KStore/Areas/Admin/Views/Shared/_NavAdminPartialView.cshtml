@@ -3,7 +3,7 @@
         <ul class="side-nav-menu scrollable">
           
             <li class="nav-item dropdown">
-                <a class="dropdown-toggle" href="javascript:void(0);">
+                <a class="dropdown-toggle" href="@Url.Action("Index", "Products")">
                     <span class="icon-holder">
                         <i class="anticon anticon-appstore"></i>
                     </span>
@@ -12,16 +12,9 @@
                         <i class="arrow-icon"></i>
                     </span>
                 </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="@Url.Action("Index", "Products")">Danh Sách Sản phẩm</a>
-                    </li>
-
-
-                </ul>
             </li>
             <li class="nav-item dropdown">
-                <a class="dropdown-toggle" href="javascript:void(0);">
+                <a class="dropdown-toggle" href="@Url.Action("Index", "ProductCategories")">
                     <span class="icon-holder">
                         <i class="anticon anticon-hdd"></i>
                     </span>
@@ -30,12 +23,6 @@
                         <i class="arrow-icon"></i>
                     </span>
                 </a>
-                <ul class="dropdown-menu">
-
-                    <li>
-                        <a href="@Url.Action("Index", "ProductCategories")">Danh Sách Danh mục sản phẩm</a>
-                    </li>
-                </ul>
             </li>
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
@@ -90,9 +77,6 @@
                 <ul class="dropdown-menu">
                     <li>
                         <a href="@Url.Action("Index", "Order")">Danh sách đơn hàng</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("OrderChuaThanhToan", "Order")">Danh sách đơn hàng chưa thanh toán</a>
                     </li>
                 </ul>
             </li>

@@ -1,7 +1,7 @@
 ﻿@{ var usercus = Session["Customer"] as KStore.Models.Customer;}
 @if (usercus == null)
 {
-    <header class="header">
+    <header class="header" style="font-family: Helvetica; ">
         <div class="header__top">
             <div class="container">
                 <div class="row">
@@ -16,6 +16,9 @@
                         <div class="header__top__right">
                             <div class="header__top__right__auth">
                                 <a href="@Url.Action("Login","Account")"><i class="fa fa-user"></i>Đăng nhập</a>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="@Url.Action("Register","Account")"><i class="fa fa-address-card"></i>Đăng ký</a>
                             </div>
                         </div>
                     </div>
@@ -33,7 +36,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
-                            <li><a href="">Tình trạng giao hàng</a></li>
+                            <li><a href="@Url.Action("ErrorThongTinHang","GioHang")">Tình trạng giao hàng</a></li>
                             <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
                         </ul>
                     </nav>
@@ -63,7 +66,7 @@ else
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
-                            <i class="fa fa-user"></i>Chào bạn @usercus.nameCustomer |
+                            <i class="fa fa-user"></i>Chào bạn <b>@usercus.nameCustomer </b>|
                             <div class="header__top__right__auth">
                                 <a href="@Url.Action("TitleUser","Account", new {id = usercus.idCustomer})"><i class="fa fa-address-card"></i>Thông tin tài khoản | </a>
                             </div>

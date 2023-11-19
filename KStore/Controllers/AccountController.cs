@@ -32,16 +32,21 @@ namespace KStore.Controllers
             if (isCustomer != null)
             {
                 Session["Customer"] = isCustomer;
+                TempData["SweetAlertMessage"] = "Đăng nhập thành công";
+                TempData["SweetAlertType"] = "success";
                 return RedirectToAction("Index", "Home");
             }
             else if (isAdmin != null)
             {
                 Session["Admin"] = isAdmin;
+                TempData["SweetAlertMessage"] = "Đăng nhập thành công";
+                TempData["SweetAlertType"] = "success";
                 return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
             else
             {
-                ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không chính xác";
+                    TempData["SweetAlertMessage"] = "Tên đăng nhập hoặc mật khẩu không chính xác";
+                    TempData["SweetAlertType"] = "error";
             }
             return View();
         }
@@ -64,24 +69,27 @@ namespace KStore.Controllers
                 var checkpassword = GetMD5(f["CheckPassword"]);
                 if (db.Customers.SingleOrDefault(c => c.userName == cus.userName) != null)
                 {
-                    ViewBag.ThongBao = "Tài khoản đã tồn tại, vui lòng nhập tài khoản khác";
-                   
+                    TempData["SweetAlertMessage"] = "Tài khoản đã tồn tại, vui lòng nhập tài khoản khác";
+                    TempData["SweetAlertType"] = "error";
+
                 }
                 else if (db.Customers.SingleOrDefault(c => c.email == cus.email) != null)
                 {
-                    ViewBag.ThongBao = "Email này đã tồn tại, vui lòng nhập Email khác";
+                    TempData["SweetAlertMessage"] = "Email này đã tồn tại, vui lòng nhập Email khác";
+                    TempData["SweetAlertType"] = "error";
                 }
                 else if (password != checkpassword)
                 {
-                    ViewBag.ThongBao = "Mật khẩu nhập lại không đúng";
+                    TempData["SweetAlertMessage"] = "Mật khẩu nhập lại không đúng";
+                    TempData["SweetAlertType"] = "error";
                 }
                 else
                 {
                     cus.passWord = password;
-                    ViewBag.ThongBao = "Đăng ký thành công";
+                    TempData["SweetAlertMessage"] = "Đăng ký thành công";
+                    TempData["SweetAlertType"] = "success";
                     db.Customers.Add(cus);
                     db.SaveChanges();
-
                 }
             }
 
@@ -112,19 +120,21 @@ namespace KStore.Controllers
             {
                 if (password != confirmPassword)
                 {
-                    ViewBag.ThongBao = "Mật khẩu và mật khẩu xác nhận không khớp.";
+                    TempData["SweetAlertMessage"] = "Mật khẩu và mật khẩu xác nhận không khớp.";
+                    TempData["SweetAlertType"] = "error";
                     return View();
                 }
 
                 customer.passWord = GetMD5( password);
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
-                ViewBag.ThongBao = "Mật khẩu đã được thay đổi thành công.";
+                TempData["SweetAlertMessage"] = "Mật khẩu đã được thay đổi thành công.";
+                TempData["SweetAlertType"] = "success";
             }
             else
             {
-                ViewBag.ThongBao = "Không tìm thấy khách hàng với email này.";
-               
+                TempData["SweetAlertMessage"] = "Không tìm thấy khách hàng với email này.";
+                TempData["SweetAlertType"] = "error";
             }
             return View();
         }

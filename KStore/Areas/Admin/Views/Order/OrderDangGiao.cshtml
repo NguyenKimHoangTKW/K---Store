@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ClotheSstore.Models.Order>
+﻿@model IEnumerable<KStore.Models.Order>
 @{
     ViewBag.Title = "InfoOrderPartial";
     int i = 0;
@@ -27,14 +27,7 @@
                     <td>@string.Format("{0:dd-MM-yyyyy}", item.orderDate)</td>
                     <td>@string.Format("{0:dd-MM-yyyyy}", item.deliveryDate)</td>
                     <td>@item.deliveryStatus</td>
-                    @if (item.checkPay == true)
-                    {
-                        <td>Đã thanh toán</td>
-                    }
-                    else
-                    {
-                        <td>Chưa thanh toán </td>
-                    }
+                    <td>@item.checkPay</td>
                     <td>@item.Customer.phone</td>
                     <td>@item.Customer.address</td>
                     <td>
