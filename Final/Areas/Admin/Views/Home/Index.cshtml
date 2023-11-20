@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-gold">
+                            <i class="anticon anticon-area-chart"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@string.Format("{0:#,0} VNĐ", ViewBag.SumPrice) </h2>
+                            <p class="m-b-0 text-muted">Tổng tiền thu được</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-purple">
+                            <i class="anticon anticon-exclamation-circle"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.lstordertransit</h2>
+                            <p class="m-b-0 text-muted">Đơn hàng chưa xử lý</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-blue">
+                            <i class="anticon anticon-skin"></i>
+
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalProduct</h2>
+                            <p class="m-b-0 text-muted">Tổng số sản phẩm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-purple">
+                            <i class="anticon anticon-user"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalCustomer</h2>
+                            <p class="m-b-0 text-muted">Tổng số khách hàng</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+

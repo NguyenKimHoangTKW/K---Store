@@ -1,57 +1,45 @@
-﻿
-@{ var customer = Session["Customer"] as ClotheSstore.Models.Customer;}
-@if (customer == null)
-{
-    <!-- FOOTER 1 -->
-    <div class="footer-widgets footer footer-1">
-        <div class="row dark large-columns-3 mb-0">
-            <div id="nav_menu-4" class="col pb-0 widget widget_nav_menu">
-                <span class="widget-title">THÔNG TIN</span><div class="is-divider small"></div><div class="menu-store-information-container">
-                    <ul id="menu-store-information" class="menu">
-                        <li id="menu-item-2231308" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2231308"><a href="@Url.Action("HuongDanChonSize","Home")">Hướng dẫn chọn Size</a></li>
-                        <li id="menu-item-2231309" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2231309"><a href="@Url.Action("ErrorThongTinHang","GioHang")">Theo dõi đơn hàng</a></li>
+﻿<footer class="footer spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__about__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                    <ul>
+                        <li>Address: 300/26, đường Phạm Ngọc Thạch, phường Hiệp Thành, Thành phố Thủ Dầu Một, tỉnh Bình Dương.</li>
+                        <li>Phone: +84 033 586 7103</li>
+                        <li>Email: 2124802010533@student.tdmu.edu.vn</li>
                     </ul>
                 </div>
             </div>
+           
+            <div class="col-lg-4 col-md-12">
+                <div class="footer__widget">
+                    <h6>K - Store</h6>
+                    <p>Chúng tôi luôn mang lại sự tin tưởng đến từ phía khách hàng</p>
 
-        </div>
-    </div>
-}
-else
-{
-    <!-- FOOTER 1 -->
-    <div class="footer-widgets footer footer-1">
-        <div class="row dark large-columns-3 mb-0">
-            <div id="nav_menu-4" class="col pb-0 widget widget_nav_menu">
-                <span class="widget-title">THÔNG TIN</span><div class="is-divider small"></div><div class="menu-store-information-container">
-                    <ul id="menu-store-information" class="menu">
-                        <li id="menu-item-2231308" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2231308"><a href="@Url.Action("HuongDanChonSize","Home")">Hướng dẫn chọn Size</a></li>
-                        <li id="menu-item-2231309" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2231309"><a href="@Url.Action("TinhTrangGiaoHang","GioHang", new {id = customer.idCustomer})">Theo dõi đơn hàng</a></li>
-                    </ul>
+                    <div class="footer__widget__social">
+                        <a href="https://www.facebook.com/profile.php?id=100028105818493&mibextid=ZbWKwL"><i class="fa fa-facebook"></i></a>
+                        <a href="https://instagram.com/bnahkhoaaaaa._?igshid=MWwxbjV3NnN4MjJ4ag=="><i class="fa fa-instagram"></i></a>
+                    </div>
+                    <img src="~/Content/assets/img/Logo-KStore.jpg" />
                 </div>
             </div>
-
         </div>
-    </div>
-}
-
-
-<!-- FOOTER 2 -->
-
-
-
-<div class="absolute-footer dark medium-text-center small-text-center">
-    <div class="container clearfix">
-
-
-        <div class="footer-primary pull-left">
-            <div class="copyright-footer">
-                Copyright 2023 © <strong>
-                </strong>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="footer__copyright">
+                    <div class="footer__copyright__text">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> K - Store <i class="fa fa-heart" aria-hidden="true"></i> 
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<a href="#top" class="back-to-top button icon invert plain fixed bottom z-1 is-outline circle" id="top-link" aria-label="Go to top"><i class="icon-angle-up"></i></a>
-
+</footer>

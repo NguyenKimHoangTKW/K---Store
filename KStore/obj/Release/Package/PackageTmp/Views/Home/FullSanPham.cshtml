@@ -1,0 +1,27 @@
+﻿@model PagedList.IPagedList<KStore.Models.Product>
+@using PagedList.Mvc;
+
+    @{
+        ViewBag.Title = "FullSanPham";
+    }
+
+<div class="row featured__filter">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+            <div class="featured__item">
+                <div class="featured__item__pic set-bg" data-setbg="">
+                    <a href="@Url.Action("ChiTietDonHang","Home", new {id = item.idProduct})"><img src="~/Areas/Admin/Images/Product_Images/@item.thumb" /></a>
+                </div>
+                <div class="featured__item__text">
+                    <h6><a href="@Url.Action("ChiTietDonHang","Home", new {id = item.idProduct})">@item.nameProduct</a></h6>
+                    <h5>@string.Format("{0:#,0} VNĐ", item.price)</h5>
+                </div>
+            </div>
+        </div>
+    }
+<div>
+
+    <a href="@Url.Action("LayTatCaSanPham","Home")"><button class="btn btn-primary" style=" margin-left: 532px; ">XEM THÊM</button></a>
+</div>
+</div>
